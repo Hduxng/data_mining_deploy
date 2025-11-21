@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ===== DARK MODE ===== */
+  :root {
+    --background: 220 25% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 220 25% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 200 100% 50%;
+    --primary-foreground: 220 25% 8%;
+
+    --secondary: 270 80% 60%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 220 15% 20%;
+    --muted-foreground: 210 20% 70%;
+
+    --accent: 180 100% 45%;
+    --accent-foreground: 220 25% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 18%;
+    --ring: 200 100% 50%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(200 100% 50%), hsl(270 80% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 25% 8%) 0%, hsl(240 30% 15%) 50%, hsl(260 40% 20%) 100%);
+    --gradient-card: linear-gradient(135deg, hsl(220 20% 12% / 0.5), hsl(240 25% 15% / 0.5));
+    
+    --shadow-glow: 0 0 40px hsl(200 100% 50% / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(200 100% 50% / 0.2);
+    
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ===== LIGHT MODE ===== */
+  .light {
+    --background: 210 40% 96%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    --primary: 200 90% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 270 80% 65%;
+    --secondary-foreground: 220 25% 10%;
+
+    --muted: 220 15% 90%;
+    --muted-foreground: 220 15% 30%;
+
+    --accent: 180 90% 45%;
+    --accent-foreground: 220 25% 8%;
+
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 15% 85%;
+    --input: 220 15% 90%;
+    --ring: 200 100% 45%;
+
+    --radius: 0.75rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(200 90% 50%), hsl(270 80% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 40% 96%) 0%, hsl(220 25% 88%) 100%);
+    --gradient-card: linear-gradient(135deg, hsla(0, 0%, 84%, 0.6),  hsla(0, 0%, 84%, 0.66));
+
+    --shadow-glow: 0 0 30px hsl(200 100% 60% / 0.3);
+    --shadow-card: 0 10px 25px -8px hsla(200, 100%, 40%, 0.2);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-500;
+    background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+  }
+}
+
+@layer utilities {
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .gradient-card {
+    background: var(--gradient-card);
+    backdrop-filter: blur(10px);
+  }
+  
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .shadow-card {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-60px); }
+  100% { transform: translateY(0); }
+}
+
+.floating {
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
