@@ -19,29 +19,16 @@ app = FastAPI(
 models.Base.metadata.create_all(bind=engine)
 
 # ================== CORS CONFIG ==================
-# Các origin được phép gọi API
-origins = [
-    # Local dev
-    "http://localhost",
-    "http://127.0.0.1",
-    "http://localhost:80",
-    "http://localhost:3000",
-    "http://localhost:5173",  # Vite default port
-    "http://localhost:5174",
-
-    # Frontend deploy trên Vercel
-    # TODO: nếu tên project khác, sửa lại đúng domain tại đây
-    "https://data-mining-webdemo.vercel.app",
-]
-
+# DEMO: mở full CORS cho mọi origin (không dùng cookie)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,        # có thể tạm dùng ["*"] nếu muốn mở hoàn toàn
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=["*"],          # cho phép mọi domain (Vercel, localhost, ...)
+    allow_credentials=False,      # không dùng cookies nên để False
+    allow_methods=["*"],          # cho mọi method: GET, POST, DELETE, ...
+    allow_headers=["*"],          # cho mọi header, kể cả Content-Type, Authorization...
 )
 # =================================================
+
 
 # Dependency để lấy database session
 def get_db():
@@ -183,18 +170,6 @@ class RecommendationRequest(BaseModel):
 async def get_recommendations(request: RecommendationRequest):
     """
     Endpoint chính để lấy recommendation dựa trên sequential mining
-
-    - **target_topic**: Topic/skill mục tiêu muốn học (e.g., "Machine Learning", "React JS")
-    - **max_steps**: Số bước tối đa trong learning path (None = toàn bộ)
-    - **courses_per_step**: Số khóa học recommend cho mỗi bước (default: 3)
-
-    Returns:
-        - success: True/False
-        - message: Thông báo
-        - target_topic: Topic đã search
-        - path: Danh sách các topic trong learning path
-        - total_steps: Tổng số bước
-        - steps: Chi tiết từng bước với courses
     """
     try:
         recommender = get_recommender()
@@ -212,10 +187,6 @@ async def get_recommendations(request: RecommendationRequest):
 async def get_available_topics():
     """
     Lấy danh sách tất cả topics có trong knowledge graph
-
-    Returns:
-        - topics: List các topic có sẵn
-        - count: Số lượng topics
     """
     try:
         recommender = get_recommender()
@@ -232,14 +203,6 @@ async def get_available_topics():
 async def search_courses(keyword: str, limit: int = 10):
     """
     Tìm kiếm khóa học theo keyword
-
-    - **keyword**: Từ khóa tìm kiếm
-    - **limit**: Số lượng kết quả tối đa (default: 10)
-
-    Returns:
-        - courses: List các khóa học phù hợp
-        - count: Số lượng kết quả
-        - keyword: Từ khóa đã tìm
     """
     try:
         recommender = get_recommender()
