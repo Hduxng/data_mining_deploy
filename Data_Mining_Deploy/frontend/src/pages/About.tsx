@@ -3,14 +3,14 @@ import { Users, GraduationCap } from "lucide-react";
 
 const About = () => {
   const teamMembers = [
-    { name: "A", studentId: "2352xxxx" },
-    { name: "B", studentId: "2352xxxx" },
-    { name: "C", studentId: "22352xxxx" },
-    { name: "D", studentId: "2352xxxx" },
-    { name: "E", studentId: "22352xxxx" },
-    { name: "F", studentId: "2352xxxx" },
-    { name: "G", studentId: "22352xxxx" },
-    { name: "H", studentId: "2352xxxx" }
+    { name: "Nguyễn Hữu Khánh Duy ", studentId: "23520375" },
+    { name: "Trần Nguyễn Tiến Đức", studentId: "23520322" },
+    { name: "Huỳnh Tiến Dũng", studentId: "23520329" },
+    { name: "Nguyễn Quang Dũng", studentId: "23520335" },
+    { name: "Chu Nguyễn Tùng Dương", studentId: "23520344" },
+    { name: "Nguyễn Lê Tùng Dương", studentId: "23520352" },
+    { name: " Hà Lê Duy", studentId: "23520363" },
+    { name: "Nguyễn Cao Duy", studentId: "23520371" }
   ];
 
   return (
